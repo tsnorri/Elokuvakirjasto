@@ -1,5 +1,5 @@
 <h1>Movie</h1>
-<ul>
+<ul ng-if="userLoggedIn">
 	<li><a ng-href="#/movies/{{movieId}}/edit">Edit</a></li>
 </ul>
 <section>

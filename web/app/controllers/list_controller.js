@@ -1,8 +1,10 @@
-MoviesApp.controller('ListController', function($scope, FirebaseService) {
+MoviesApp.controller('ListController', function($scope, currentAuth, FirebaseService) {
 	
 	FirebaseService.fetchMovies(function(movies) {
 		$scope.movies = movies;
 	});
+	
+	$scope.currentAuth = currentAuth;
 	
 	$scope.removeAction = function(movie, $event) {
 		$scope.removeMovie(movie);
@@ -10,6 +12,7 @@ MoviesApp.controller('ListController', function($scope, FirebaseService) {
 	};
 	
 	$scope.removeMovie = function(movie) {
-		FirebaseService.removeMovie(movie);
+		if (currentAuth)
+			FirebaseService.removeMovie(movie);
 	};
 });

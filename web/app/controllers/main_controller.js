@@ -1,4 +1,4 @@
-MoviesApp.controller('MainController', function($scope, $rootScope, AuthenticationService) {
+MoviesApp.controller('MainController', function($scope, AuthenticationService) {
 	$scope.userLoggedIn = AuthenticationService.getUserLoggedIn();
 
 	$scope.logout = function() {

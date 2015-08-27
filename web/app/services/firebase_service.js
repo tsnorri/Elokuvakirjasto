@@ -51,8 +51,8 @@ MoviesApp.service('AuthenticationService', function($firebase, $firebaseAuth) {
 		});
 	};
 	
-	this.checkLoggedIn = function(cb) {
-		firebaseAuth.$waitForAuth().then(cb);
+	this.checkLoggedIn = function() {
+		return firebaseAuth.$waitForAuth();
 	};
 
 	this.logUserOut = function() {
