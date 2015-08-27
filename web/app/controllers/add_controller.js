@@ -1,6 +1,6 @@
 MoviesApp.controller('AddController', function($scope, $location, FirebaseService) {
 
-	$scope.addMovieAction = function() {
+	$scope.finishedEditingAction = function() {
 		var movie = new Movie(
 			$scope.name,
 			$scope.director,

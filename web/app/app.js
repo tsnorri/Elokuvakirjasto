@@ -20,6 +20,14 @@ MoviesApp.config(function($routeProvider) {
 		controller: 'AddController',
 		templateUrl: 'app/views/add.tpl'
 	})
+	.when('/movies/:id', {
+		controller: 'ViewController',
+		templateUrl: 'app/views/view.tpl'
+	})
+	.when('/movies/:id/edit', {
+		controller: 'EditController',
+		templateUrl: 'app/views/edit.tpl'
+	})
 	.otherwise({
 		redirectTo: '/movies'
 	});

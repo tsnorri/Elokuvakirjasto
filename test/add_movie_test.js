@@ -45,7 +45,7 @@ describe('Add movie', function(){
   	* on kutsutta oikeaa funktiota lisäämällä siihen vakoilijan ja käyttämällä
   	* toBeCalled-oletusta.
 	*/
-	it('should be able to add a movie by its name, director, release date and description', function(){
+	it('should be able to add a movie by its name, director, release date and description', function() {
 		var test = false;
 		var movie = new Movie("Name", "Driver", 1900, "Description");
 		
