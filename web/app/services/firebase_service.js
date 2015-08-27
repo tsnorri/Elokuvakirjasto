@@ -1,6 +1,7 @@
+var FIREBASE_BASE_URI = 'https://dazzling-inferno-8642.firebaseIO.com';
+
 MoviesApp.service('FirebaseService', function($firebaseArray){
-	var baseURI = 'https://dazzling-inferno-8642.firebaseIO.com';
-	var ref = new Firebase(baseURI + '/movies');
+	var ref = new Firebase(FIREBASE_BASE_URI + '/movies');
 	var movies = $firebaseArray(ref);
 	
 	this.fetchMovies = function(cb) {
@@ -21,5 +22,44 @@ MoviesApp.service('FirebaseService', function($firebaseArray){
 	
 	this.saveMovie = function(movie, cb) {
 		movies.$save(movie).then(function() { if (cb) cb(); });
+	};
+});
+
+MoviesApp.service('AuthenticationService', function($firebase, $firebaseAuth) {
+	var firebaseRef = new Firebase(FIREBASE_BASE_URI);
+	var firebaseAuth = $firebaseAuth(firebaseRef);
+
+	this.logUserIn = function(email, password, cb) {
+		firebaseAuth.$authWithPassword({
+			email: email,
+			password: password
+		}).then(function(authData) {
+			cb(true); 
+		}).catch(function(error) {
+			cb(false);
+		});
+	};
+
+	this.createUser = function(email, password, cb) {
+		return firebaseAuth.$createUser({
+			email: email,
+			password: password
+		}).then(function(authData) {
+			cb(true); 
+		}).catch(function(error) {
+			cb(false);
+		});
+	};
+	
+	this.checkLoggedIn = function(cb) {
+		firebaseAuth.$waitForAuth().then(cb);
+	};
+
+	this.logUserOut = function() {
+		firebaseAuth.$unauth();
+	};
+
+	this.getUserLoggedIn = function() {
+		return firebaseAuth.$getAuth();
 	};
 });

@@ -2,7 +2,7 @@
 <ul>
 	<li><a ng-href="#/movies/{{movieId}}/edit">Edit</a></li>
 </ul>
-<section ng-controller="ViewController">
+<section>
 	<table>
 		<tbody>
 			<tr>

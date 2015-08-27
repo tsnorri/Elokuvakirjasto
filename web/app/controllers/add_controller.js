@@ -1,4 +1,6 @@
-MoviesApp.controller('AddController', function($scope, $location, FirebaseService) {
+MoviesApp.controller('AddController', function($scope, $location, currentAuth, FirebaseService) {
+	if (!currentAuth)
+		$location.path('/login');
 
 	$scope.finishedEditingAction = function() {
 		var movie = new Movie(

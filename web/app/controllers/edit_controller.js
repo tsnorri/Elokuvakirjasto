@@ -1,4 +1,7 @@
-MoviesApp.controller('EditController', function($scope, $location, $routeParams, FirebaseService) {
+MoviesApp.controller('EditController', function($scope, $location, $routeParams, currentAuth, FirebaseService) {
+	if (!currentAuth)
+		$location.path('/login');
+	
 	FirebaseService.getMovie($routeParams.id, function(movie) {
 		if (!movie)
 			$location.path("/movies");

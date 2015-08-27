@@ -1,5 +1,5 @@
 <h1>Movies from OMDb</h1>
-<section ng-controller="OMDbListController">
+<section>
 	<form name="searchForm">
 		<p><label>Name: <input type="text" name="name" ng-model="name" required></label></p>
 		<p><label>Released: <input type="number" integer name="released" ng-model="released"></label></p>

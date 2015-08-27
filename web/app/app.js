@@ -1,5 +1,12 @@
 var MoviesApp = angular.module('Movies', ['firebase', 'ngRoute', 'validation.match']);
 
+angular.module('exceptionOverride', []).factory('$exceptionHandler', function() {
+	return function(exception, cause) {
+		exception.message += ' (caused by "' + cause + '")';
+		throw exception;
+	};
+});
+
 MoviesApp.directive('integer', function() {
 	return {
 		'require': 'ngModel',
@@ -12,13 +19,27 @@ MoviesApp.directive('integer', function() {
 });
 
 MoviesApp.config(function($routeProvider) {
-	$routeProvider.when('/movies', {
+	$routeProvider.when('/login', {
+		controller: "UserController",
+		templateUrl: "app/views/login.tpl"
+	})
+	.when('/movies', {
 		controller: 'ListController',
-		templateUrl: 'app/views/list.tpl'
+		templateUrl: 'app/views/list.tpl',
+		resolve: {
+			currentAuth: function(AuthenticationService) {
+				return AuthenticationService.checkLoggedIn();
+			}
+		}
 	})
 	.when('/movies/new', {
 		controller: 'AddController',
-		templateUrl: 'app/views/add.tpl'
+		templateUrl: 'app/views/add.tpl',
+		resolve: {
+			currentAuth: function(AuthenticationService) {
+				return AuthenticationService.checkLoggedIn();
+			}
+		}
 	})
 	.when('/movies/:id', {
 		controller: 'ViewController',
@@ -26,7 +47,12 @@ MoviesApp.config(function($routeProvider) {
 	})
 	.when('/movies/:id/edit', {
 		controller: 'EditController',
-		templateUrl: 'app/views/edit.tpl'
+		templateUrl: 'app/views/edit.tpl',
+		resolve: {
+			currentAuth: function(AuthenticationService) {
+				return AuthenticationService.checkLoggedIn();
+			}
+		}
 	})
 	.when('/OMDb', {
 		controller: 'OMDbListController',
