@@ -28,7 +28,16 @@ MoviesApp.config(function($routeProvider) {
 		controller: 'EditController',
 		templateUrl: 'app/views/edit.tpl'
 	})
+	.when('/OMDb', {
+		controller: 'OMDbListController',
+		templateUrl: 'app/views/OMDblist.tpl'
+	})
 	.otherwise({
 		redirectTo: '/movies'
 	});
 });
+
+
+MoviesApp.config(['$httpProvider', function($httpProvider) {
+	delete $httpProvider.defaults.headers.common["X-Requested-With"];
+}]);
