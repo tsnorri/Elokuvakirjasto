@@ -1,1 +1,26 @@
-// Toteuta moduulisi tänne
+var MoviesApp = angular.module('Movies', ['firebase', 'ngRoute', 'validation.match']);
+
+MoviesApp.directive('integer', function() {
+	return {
+		'require': 'ngModel',
+		'link': function($scope, el, attr, ctrl) {
+			ctrl.$parsers.unshift(function(value) {
+				return parseInt(value, 10);
+			});
+		}
+	};
+});
+
+MoviesApp.config(function($routeProvider) {
+	$routeProvider.when('/movies', {
+		controller: 'ListController',
+		templateUrl: 'app/views/list.tpl'
+	})
+	.when('/movies/new', {
+		controller: 'AddController',
+		templateUrl: 'app/views/add.tpl'
+	})
+	.otherwise({
+		redirectTo: '/movies'
+	});
+});

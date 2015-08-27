@@ -5,17 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Elokuvakirjasto</title>
-  </head>
-  <body>
-    <h1>Hêllo, world!</h1>
-
-    <!-- Hyödyllisiä kirjastoja -->
+    <script src="bower_components/underscore/underscore-min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-route/angular-route.min.js"></script>
+	<script src="bower_components/angular-validation-match/dist/angular-input-match.min.js"></script>
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
-
-    <!-- Linkitä omat tiedostosi tähän (huomaa, että polun juuri on web-kansio!) -->
     <script src="app/app.js"></script>    
+	<script src="app/objects.js"></script>
+	<script src="app/controllers/add_controller.js"></script>
+	<script src="app/controllers/list_controller.js"></script>
+	<script src="app/services/firebase_service.js"></script>
+  </head>
+  <body ng-app="Movies">
+	  <header>
+		  <nav>
+			  <ul>
+				  <li><a href="#/movies">List</a></li>
+				  <li><a href="#/movies/new">Add</a></li>
+			  </ul>
+		  </nav>
+	  </header>
+	  <div ng-view></div>
   </body>
 </html>
